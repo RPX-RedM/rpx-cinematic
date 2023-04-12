@@ -28,6 +28,9 @@ local StartCinematic = function(CinematicName)
             CurrentCinematic = Cinematic
             CurrentStage = 1
 
+            DisplayRadar(false)
+            DisplayHud(false)
+
             LocalPlayer.state.UIHidden = true
 
             -- Disable player movement
@@ -137,6 +140,9 @@ local StartCinematic = function(CinematicName)
 
             CinematicStarted = false
             CurrentCinematic = nil
+
+            DisplayRadar(true)
+            DisplayHud(true)
 
             TriggerEvent("RPX:CinematicFinished", CinematicName)
         end
