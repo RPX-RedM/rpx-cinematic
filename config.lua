@@ -46,7 +46,7 @@ Config.Cinematics = {
                 Cam = nil,
                 FinishCam = nil,
             },
-            [5] = {
+            [6] = {
                 Position = vector3(-358.33, 782.59, 118.59),
                 PointCamAt = vector3(-232.48, 800.04, 134.13),
                 TransitionToPosition = vector3(-252.84, 793.37, 118.59),

@@ -42,11 +42,11 @@ local StartCinematic = function(CinematicName)
             -- Set the camera
             for id,camera in ipairs(Cinematic.Cameras) do
                 Config.Cinematics[CinematicName].Cameras[id].Cam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-                SetCamCoord(Config.Cinematics[CinematicName].Cameras[id].Cam, Cinematic.Cameras[id].Position)
+                SetCamCoord(Config.Cinematics[CinematicName].Cameras[id].Cam, Cinematic.Cameras[id].Position --[[@as number]])
             end
             for id,camera in ipairs(Cinematic.Cameras) do
                 Config.Cinematics[CinematicName].Cameras[id].FinishCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-                SetCamCoord(Config.Cinematics[CinematicName].Cameras[id].FinishCam, Cinematic.Cameras[id].TransitionToPosition)
+                SetCamCoord(Config.Cinematics[CinematicName].Cameras[id].FinishCam, Cinematic.Cameras[id].TransitionToPosition --[[@as number]])
             end
 
             -- Enable the letterbox
@@ -70,28 +70,28 @@ local StartCinematic = function(CinematicName)
                 ShowingText = Cinematic.Cameras[id].Text
 
                 if type(Cinematic.Cameras[id].PointCamAt) == "vector3" then
-                    PointCamAtCoord(camera.Cam, Cinematic.Cameras[id].PointCamAt)
+                    PointCamAtCoord(camera.Cam, Cinematic.Cameras[id].PointCamAt  --[[@as number]])
                 elseif type(Cinematic.Cameras[id].PointCamAt) == "number" then
-                    SetCamRot(camera.Cam, 0.0, 0.0, Cinematic.Cameras[id].PointCamAt)
+                    SetCamRot(camera.Cam, 0.0, 0.0, Cinematic.Cameras[id].PointCamAt  --[[@as number]])
                 end
 
                 if type(Cinematic.Cameras[id].PointCamAt) == "vector3" then
                     -- The order of these two functions is important
                     SetCamActiveWithInterp(camera.FinishCam, camera.Cam, 10000, 3.0, 3.0)
-                    PointCamAtCoord(camera.FinishCam, Cinematic.Cameras[id].PointCamAt)
+                    PointCamAtCoord(camera.FinishCam, Cinematic.Cameras[id].PointCamAt --[[@as number]])
                 elseif type(Cinematic.Cameras[id].PointCamAt) == "number" then
                     -- The order of these two functions is important
-                    SetCamRot(camera.FinishCam, 0.0, 0.0, Cinematic.Cameras[id].PointCamAt)
+                    SetCamRot(camera.FinishCam, 0.0, 0.0, Cinematic.Cameras[id].PointCamAt --[[@as number]])
                     SetCamActiveWithInterp(camera.FinishCam, camera.Cam, 10000, 3.0, 3.0)
                 end
 
                 -- Begin rendering the script cameras
-                RenderScriptCams(true, true, 0, 0)
+                RenderScriptCams(true, true, 0)
 
                 -- Fade the screen in and show the subtitle
                 DoScreenFadeIn(250)
                 Wait(260)
-                ShowSubtitle(camera.Text, 1, nil)
+                ShowSubtitle(camera.Text)
 
                 -- Wait for the camera to finish interpolating
                 Wait(10000 + 2500)
@@ -104,7 +104,7 @@ local StartCinematic = function(CinematicName)
             end
 
             -- Stop rendering the script cameras
-            RenderScriptCams(false, true, 0, 0)
+            RenderScriptCams(false, true, 0)
 
             LocalPlayer.state.UIHidden = false
 
