@@ -6,11 +6,8 @@ description 'RPX Cinematic System'
 author 'Sinatra#0101'
 version '0.0.1'
 
-shared_scripts {
-    'config.lua',
-}
-
 client_scripts {
+    'client/config.lua',
     'client/main.lua',
 }
 
