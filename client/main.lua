@@ -3,17 +3,20 @@ local CurrentCinematic = nil
 local CurrentStage = nil
 local ShowingText = nil
 
---@function: ShowSubtitle
---@description: Shows a subtitle.
---@param: Text string The text to show.
-local function ShowSubtitle(Text)
-    SendNUIMessage({ action = "SHOW_SUBTITLE", text = Text })
-end
-
 --@function: HideSubtitle
 --@description: Hides the subtitle.
 local function HideSubtitle()
     SendNUIMessage({ action = "HIDE_SUBTITLE" })
+end
+
+--@function: ShowSubtitle
+--@description: Shows a subtitle.
+--@param: Text string The text to show.
+local function ShowSubtitle(Text, timeout)
+    SendNUIMessage({ action = "SHOW_SUBTITLE", text = Text })
+    if timeout then
+        SetTimeout(timeout, HideSubtitle)
+    end
 end
 
 --@function: StartCinematic
